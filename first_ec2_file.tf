@@ -5,7 +5,7 @@ secret_key = "13y6AGETKH0vAAXzBGcgeLVnfbSyz2qukVXMno4a"
 
 }
 
-resource "aws_instance" "myec2" {
+resource "aws_instance" "myec2 changes" {
   ami           = ami-064ff912f78e3e561
   instance_type = "t2.micro"
 }
