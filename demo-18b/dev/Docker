@@ -1,0 +1,168 @@
+Docker -- 
+Docker Image 
+Docker Container 
+
+
+---------------Docker Installation---------------------------
+
+apt-get update -y
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install docker-ce
+
+
+deamon
+
+1. Foreground
+
+docker run ubuntu:14.04 /bin/echo 'Hello world'
+docker images
+docker ps 
+docker ps -a
+
+
+2. interactive
+
+docker run -t -i ubuntu:14.04 /bin/bash   
+
+3.Daemon Mode
+
+docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+docker exec -it containerid /bin/bash
+docker logs 446753029f87
+
+
+To execute the docker with container id
+docker exec -it 446753029f87 /bin/bash
+
+
+
+To remove all the dockers which are in exited state.
+
+docker rm $(docker ps -aq --filter "status=exited"
+
+
+
+
+
+--------------------------------------
+                                
+						
+								
+--------Docker File Python Flask -------------------------
+FROM python:2.7
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD [ "python", "app.py" ]
+
+--------------------app.py---------------------------------
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+    
+---------------------requirements.txt-----------------
+Flask
+--------------
+
+docker build . -t pythondemo:latest
+docker image
+docker run --name test-python -d ImageId
+docker exec -it container_id /bin/bash
+
+curl 127.0.0.1:5000
+
+docker ps
+
+
+------------------- Commands -----------------------
+
+57  cd /opt/
+   58  mkdir docker-demo
+   59  cd docker-demo/
+   60  mkdir flask-demo
+   61  cd flask-demo/
+   62  ls -ltr
+   63  vi docker_file
+   64  ls -ltr
+   65  vi app.py
+   66  vi from flask import Flask
+   67  vi requirement.txt
+   68  docker build . -t pythondemo:latest
+   69  ls -ltr
+   70  mv docker_file Dockerfile
+   71  docker build . -t pythondemo:latest
+   72  docker ps
+   73  ls -ltr
+   74  mv requirement.txt requirements.txt
+   75  docker build . -t pythondemo:latest
+   76  docker ps
+   77  docker ps -a
+   78  docker images
+   79  docker run --name test-python -d 014a2b403c84
+   80  docker exec -it 014a2b403c84 /bin/bash
+   81  docker ps
+   82  docker exec -it e91e2d616a8b /bin/bash
+
+CNI Container Network Interface model
+Overlay 
+						
+
+---------------Docker File Demo Nginx ----------------------
+FROM fedora
+MAINTAINER scollier <scollier@redhat.com>
+
+RUN yum -y update && yum clean all
+RUN yum -y install nginx && yum clean all
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN echo "nginx on Fedora" > /usr/share/nginx/html/index.html
+
+EXPOSE 80
+
+CMD [ "/usr/sbin/nginx" ]
+
+-------------------------------------
+Commands to enter on console on docker instance.
+
+docker build . -t nginxdemo:latest
+docker run --name mynginx -p 5000:80 -d 5435e7421112
+curl localhost:5000
+-------------------------------------------------------
+
+Commands -
+						
+Command to delete all the exited images - 
+docker rm $(docker ps -a -q) 								
+
+"docker inspect container ID" - to check Ip address of container.
+
+docker network inspect a2ef554265b9(Network ID) To check the container details through network id
+
+https://docker-k8s-lab.readthedocs.io/en/latest/docker/port-mapping.html  - For study
+
+
+
+
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
